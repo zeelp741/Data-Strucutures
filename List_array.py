@@ -1,17 +1,6 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = '2021-01-31'
-------------------------------------------------------------------------
-"""
 # Imports
 from copy import deepcopy
 from pickle import NONE
-
 
 class List:
 
@@ -432,8 +421,7 @@ class List:
             if self._values[i] > temp :
                 temp  = self._values[i]
                 
-        value = deepcopy(temp)
-                
+        value = deepcopy(temp)      
         return value
 
     def min(self):
@@ -446,26 +434,13 @@ class List:
             value - a copy of the minimum value in the List (?)
         -------------------------------------------------------
         """
-#         value = 999999999999
-#         
-#         for i in range(self.size_()):
-#             if self._values[i] < value:
-#                 value = self._values[i]
-#                 
-#         return value
-
         assert not self.isEmpty()
-
         temp = self._values[0];
         for i in range(self._count):
             if self._values[i] < temp:
                 temp = self._values[i]
-        
-        
         value = deepcopy(temp)
-        
         return value
-
 
     def count(self, element):
         """
@@ -518,24 +493,16 @@ class List:
             None
         -------------------------------------------------------
         """
-        
         count = 0
-        
         new_list = List(self._capacity)
-        
         for i in self._values:
             if i not in new_list._values:
                 new_list.insert(count,i)
-            count += 1
-                
+            count += 1   
         self._values = new_list._values
         self._count = new_list._count
-            
-        
-        
-
-
-
+        return
+    
     def remove_front(self):
         """
         -------------------------------------------------------
@@ -545,15 +512,10 @@ class List:
         Returns:
             value - the first data element in the List (?)
         -------------------------------------------------------
-        """
-        
+        """ 
         value = self._values[self._front]
-        
         self.remove(value)
-        
         return value
-        
-        #you code goes here
     
     def remove_many(self, element):
         """
@@ -568,37 +530,14 @@ class List:
             None
         -------------------------------------------------------
         """
-        
         counter = 0
         for i in self._values:
-            
-            
             if i == element:
-                
-                
                 counter += 1;
-        
         for i in range(counter):
-            
-            self.remove(element)
-        
-        
-#         counter = 0
-# 
-#         for i in range(self._values):
-#              
-#             if self._values[i] == element:
-# 
-#                 counter += 1
-#                 
-#             
-#         for i in range(counter):
-#             
-#             self.remove(element)
-
-               
-            
-
+            self.remove(element) 
+        return
+    
     def is_identical(self, target):
         """
         ---------------------------------------------------------
@@ -614,25 +553,17 @@ class List:
                 as target in the same order, otherwise False. (boolean)
         -------------------------------------------------------
         """
-        
         count = 0
         identical = False
-        
-        
         for i in range(self._count):
             if self._values[i] == target._values[i]:
-                count += 1
-                
+                count += 1    
         if count == self._count and self.isEmpty() == False:
             identical = True
-            
         if target.isEmpty() and self.isEmpty():
             identical = True
-            
         return identical
-            
-            
-        
+    
     def intersection(self, source1, source2):
         """
         -------------------------------------------------------
@@ -675,27 +606,17 @@ class List:
         -------------------------------------------------------
         """
         new_lst = List(self._capacity)
-#         
         for i in source1._values:
-             
             if i not in new_lst._values:
-                 
                 new_lst.insert(new_lst._count, i)
          
         for i in source2._values:
-             
             if i not in new_lst._values:
-                 
                     new_lst.insert(new_lst._count, i)
-        
 
-                
         self._values = new_lst._values
-            
         self._count = new_lst._count
-        
-        
-        
+
     def split_alt(self):
         """
         -------------------------------------------------------
@@ -749,7 +670,6 @@ class List:
         else:
             midpoint = self._count // 2
             
-        
         for i in range(midpoint):
             target1.append(self._values[i])
             
@@ -763,7 +683,7 @@ class List:
             
         target1._count = midpoint
         target2._count = midpoint
-        
+    
         return target1, target2
                 
     def combine(self, source1, source2):
@@ -820,9 +740,3 @@ class List:
         """
         for value in self._values:
             yield value
-            
-            
-            
-
-        
-
