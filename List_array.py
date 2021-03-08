@@ -47,8 +47,6 @@ class List:
             True if the List is full, False otherwise.
         -------------------------------------------------------
         """
-
-        
         return self._count >= self._capacity
  
     def size_(self):
@@ -62,8 +60,7 @@ class List:
         -------------------------------------------------------
         """
         return self._count
-
-   
+    
     def __len__(self):
         """
         -------------------------------------------------------
@@ -95,37 +92,22 @@ class List:
             True if insert is successful, False otherwise.
         -------------------------------------------------------
         """
-#         assert self._is_valid_index(i), "invalid indices"
-# 
-#         assert self._count< self._capacity, "List is full"
+        assert self._is_valid_index(i), "invalid indices"
+        assert self._count< self._capacity, "List is full"
         
         if i < 0:
             i = self._count + i
 
-        #TODO: make it work for negative index
-        #TODO: if array is full 
-        
-        
         if self._count == self._capacity:
             new_lst = List()
             new_lst._capacity = self._capacity*2
             new_lst._values = [None] * (self._capacity*2)
-            
-#             new_lst = deepcopy(self)
-            
+
             for i in range(self._count):
                 new_lst._values[i] = deepcopy(self._values[i])
                 
             self._capacity = new_lst._capacity
             self._values = new_lst._values
-        
-#         if self.isFull():
-#             new_list = List(self._capacity * 2)
-#              
-#             for i in range(self.size_()):
-#                 new_list.append(self._values[i])
-#                 
-#             new_list = self
 
         #insert if there is room in place
         j =0
@@ -137,9 +119,7 @@ class List:
             self._values[i] = deepcopy(element)           
         self._count += 1                            #increment number of elements
         
-        
         return self._is_valid_index(i)
-
 
     def prepend(self, element):
         """
@@ -153,23 +133,12 @@ class List:
             None
         -------------------------------------------------------
         """
-        
-
         for i in range(self._count -1, -1, -1):
-            
-            
             self._values[i + 1] = self._values[i]
-            
         self._count +=1 
-            
-
         self._values[self._front] = deepcopy(element)
         
-        
-            
-        
-        #your code goes here
-        
+        return
 
     def append(self, element):
         """
@@ -183,14 +152,10 @@ class List:
             None
         -------------------------------------------------------
         """
-        
-    
-        
         self._values[self._count] = deepcopy(element)
-        
         self._count += 1
         
-
+        return
 
     def _linear_search(self, element):
         """
@@ -205,20 +170,15 @@ class List:
             i - the index of element in the List, -1 if element
              is not found (int)
         -------------------------------------------------------
-        """
-        
-        value = -1
-        
+        """ 
+        value = -1 
         i = 0
         while i < self._count:
             if self._values[i] == element:
                 value = i   
             i += 1     
-        
-
         return value
-            
- 
+
     def remove(self, element):
         """
         -------------------------------------------------------
@@ -233,7 +193,6 @@ class List:
         -------------------------------------------------------
         """
         assert not self.isEmpty(), "cannot remove from an empty List"
-
         index = self._linear_search(element)
 
         if index > -1:
@@ -261,10 +220,8 @@ class List:
         -------------------------------------------------------
         """
         i = self._linear_search(element)
-
         return i > -1
     
-
     def peek(self):
         """
         -------------------------------------------------------
@@ -277,7 +234,6 @@ class List:
         -------------------------------------------------------
         """
         assert not self.isEmpty(), "Cannot peek at an empty List"
-
         element = deepcopy(self._values[0])
         return element
 
@@ -294,20 +250,16 @@ class List:
             List, -1 if element is not in the List. (int)
         -------------------------------------------------------
         """
-        
         index = self._linear_search(element)
-        
         counter = 0;
         value = -1;
-        
         
         for i in range(self._count):
             if element == self._values[i]:
                 value = counter
             counter += 1
-        
-        return value
 
+        return value
 
     def _is_valid_index(self, i):
         """
@@ -322,18 +274,14 @@ class List:
         Returns:
             True if i is a valid index, False otherwise.
         -------------------------------------------------------
-        """
-        
+        """   
         state = False
-#        
         if i <= self._count and i >= self._count*-1:
                 state = True
-        
         if self.isEmpty() or i > self._count - 1:
             state = False
 
         return state
-
 
     def __getitem__(self, i):
         """
@@ -348,7 +296,6 @@ class List:
         -------------------------------------------------------
         """
         assert self._is_valid_index(i), "Invalid index: out of range"
-
         if i < 0:
             i = self._count + i
         value = deepcopy(self._values[i])
@@ -370,14 +317,10 @@ class List:
             None
         -------------------------------------------------------
         """
-
         if i < 0:
-           
             i = self._count + i
-            
         self._values[i] = deepcopy(element)
-        
-
+        return
 
     def __contains__(self, element):
         """
@@ -396,8 +339,7 @@ class List:
         
         if i != -1:
             state = True
-            
-        
+
         return state
 
     def max(self):
@@ -410,11 +352,7 @@ class List:
             value - a copy of the maximum value in the List (?)
         -------------------------------------------------------
         """
-        
-        assert not self.isEmpty()
-
-        value = -999999999999
-        
+        assert (len(self._values) > 0), 'Cannot find maximum of an empty list'        
         temp = self._values[0]
         
         for i in range(self.size_()):
@@ -434,7 +372,7 @@ class List:
             value - a copy of the minimum value in the List (?)
         -------------------------------------------------------
         """
-        assert not self.isEmpty()
+        assert (len(self._values) > 0), 'Cannot find minimum of an empty list'
         temp = self._values[0];
         for i in range(self._count):
             if self._values[i] < temp:
@@ -455,31 +393,11 @@ class List:
             number - number of times element appears in List (int)
         -------------------------------------------------------
         """
-        
         number = 0
-        
         for i in range(self.size_()):
             if element == self._values[i]:
                 number += 1
-                
         return number
-        
-
-
-    def reverse(self):
-        """
-        -------------------------------------------------------
-        The contents of the List are reversed in order with respect
-        to their order before the operation was called.
-        Use: lst.reverse()
-        -------------------------------------------------------
-        Returns:
-            None
-        -------------------------------------------------------
-        """
-        
-        #your code goes here
-
 
     def clean(self):
         """
