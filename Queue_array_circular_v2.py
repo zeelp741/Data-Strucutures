@@ -1,17 +1,4 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = DATE
-------------------------------------------------------------------------
-"""
-# pylint: disable=W0212
-
 from copy import deepcopy
-
 
 class Queue:
     """
@@ -59,7 +46,6 @@ class Queue:
         else:
             return False
         
-
     def isFull(self):
         """
         -------------------------------------------------------
@@ -83,10 +69,8 @@ class Queue:
             the number of data elements in the queue.
         -------------------------------------------------------
         """
-        
         if self.isEmpty():
             return 0
-    
         else:
             return self._rear - self._front + 1
 
@@ -100,8 +84,10 @@ class Queue:
             the number of data elements in the queue.
         -------------------------------------------------------
         """
-        
-        #your code goes here
+        if self.isEmpty():
+            return 0
+        else:
+            return self._rear - self._front + 1
         
     def enqueue(self, element):
         """
@@ -116,17 +102,11 @@ class Queue:
         -------------------------------------------------------
         """
         
-#         assert not self.isFull(), "Queue is full"
-    
-#         if (self._rear == -1):
-#             self._rear = 0
-#             self._front = 0
-               
+        assert not self.isFull(), "Queue is full"
+ 
         self._values[self._rear] = deepcopy(element)
         self._rear += 1
         return
-        
-
 
     def dequeue(self):
         """
@@ -149,7 +129,6 @@ class Queue:
             self._rear = -1
  
         return value    
-        #your code goes here
 
     def peek(self):
         """
@@ -163,7 +142,8 @@ class Queue:
         -------------------------------------------------------
         """
         
-        #your code goes here
+        value = deepcopy(self._front)
+        return value
 
     def __iter__(self):
         """
