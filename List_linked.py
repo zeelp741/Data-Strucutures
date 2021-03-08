@@ -11,8 +11,6 @@ __updated__ = DATE
 
 from copy import deepcopy
 
-
-
 class Node:
 
     def __init__(self, element):
@@ -57,9 +55,7 @@ class List:
             True if the List is empty, False otherwise.
         -------------------------------------------------------
         """
-        
-        #your code goes here
-
+        return self._count == 0
 
     def __len__(self):
         """
@@ -72,7 +68,6 @@ class List:
         -------------------------------------------------------
         """
         return self._count
-
 
     def prepend(self, element):
         """
@@ -108,7 +103,6 @@ class List:
             None
         -------------------------------------------------------
         """
-        
         node = Node(element)
         
         if self._count == 0:
@@ -117,7 +111,6 @@ class List:
             self._tail._next = node 
         self._tail = node 
         self._count +=1 
-        
         return
 
 
@@ -209,15 +202,14 @@ class List:
             max_data - a copy of the maximum value in the list (?)
         -------------------------------------------------------
         """
-        max_data = -99999999
+
         current = self._head
+        max_data = current._data
         
         while current != None:
             if current._data > max_data:
                 max_data = current._data
-            
-            current = current._next
-            
+            current = current._next     
         return max_data
 
     def min(self):
@@ -230,16 +222,14 @@ class List:
             min_data - a copy of the minimum value in the list (?)
         -------------------------------------------------------
         """
-        
-        min_data = 99999999
+
         current = self._head
+        min_data = current._data
         
         while current != None:
             if min_data > current._data:
-                min_data = current._data
-                
+                min_data = current._data 
             current = current._next
-            
         return min_data
 
     def count(self, element):
@@ -255,14 +245,11 @@ class List:
             number - number of times element appears in List (int)
         -------------------------------------------------------
         """
-        
         number = 0
         current = self._head
-    
         while current is not None:
             if current._data == element:
                 number += 1
-
             current = current._next
         return number
 
@@ -284,7 +271,6 @@ class List:
         
         previous, current, index = self._linear_search(element)
         if index >= 0:
-
             if previous is None:
                 self._head = current._next
             else:
@@ -295,7 +281,6 @@ class List:
             state = True
         return state
         
-    
     def find(self, element):
         """
         -------------------------------------------------------
@@ -309,9 +294,7 @@ class List:
             b - True if the value is found, False otherwise
         -------------------------------------------------------
         """
-        
         _, current, _ = self._linear_search(element)
-
         if current is not None:
             b = True
         else:
@@ -328,11 +311,8 @@ class List:
             value - a copy of the first value in the list (?)
         -------------------------------------------------------
         """
-        
         current = self._head
-        
         value = current._data
-        
         return value
 
     def indexOf(self, element):
@@ -358,16 +338,12 @@ class List:
             if current._data == element:
                 index = counter
                 found = True
-                
             counter += 1
             current = current._next
-            
         if not found:
             index = -1
-            
         return index
                 
-
     def _is_valid_index(self, i):
         """
         -------------------------------------------------------
@@ -401,13 +377,10 @@ class List:
         
         if i < 0:
             i = self._count + i
-        
         j = 0
-
         while j < i:
             current = current._next
             j += 1
-
         value = deepcopy(current._data)
         return value
 
@@ -429,13 +402,11 @@ class List:
         
         if i < 0:
             i = self._count + i
-        
-        j = 0
 
+        j = 0
         while j < i:
             current = current._next
             j += 1
-
         current._data = deepcopy(value)
         return value
 
@@ -454,12 +425,10 @@ class List:
         current = self._head
         found = False
         
-        
         while current != None:
             if current._data == element:
                 found = True
             current = current._next
-            
         return found
      
     def remove_head(self):
@@ -494,7 +463,6 @@ class List:
         -------------------------------------------------------
         """
         current = self._head
-        
         while current != None:
             if current._data == element:
                 self.remove(element)
@@ -535,17 +503,12 @@ class List:
         
         while current is not None:
             if current._data not in visited:
-                
                 visited.append(current._data)
                 previous = current
-                
             else:
-                
                 previous._next = current._next
                 self._count -= 1
-                
             current = current._next
-            
         return
 
     def is_identical(self, target):
@@ -570,13 +533,10 @@ class List:
         while current != None and target_current != None:
             if current._data ==  target_current._data:
                 counter += 1
-                
             target_current = target_current._next
             current = current._next
-            
         if counter == self._count:
             identical = True
-            
         return identical        
 
     def intersection(self, source1, source2):
@@ -597,23 +557,16 @@ class List:
         """
         
         current = source1._head
-        
         while current is not None:
-            
             previous = source2._head
-            
             while previous is not None:
-                
                 if current._data == previous._data and self.__contains__(current._data) == False:
-                    
                     self.append(current._data)
-                    
                 previous = previous._next
-                
             current = current._next
-        
 
-    
+        return        
+
     def union(self, source1, source2):
         """
         -------------------------------------------------------
@@ -632,23 +585,16 @@ class List:
         """
         current = source1._head
         previous = source2._head 
-        
         while current is not None:
-            
             self.append(current._data)
-            
             current = current._next
             
         while previous is not None:
-            
             if self.__contains__(previous._data) == False:
-                
                 self.append(previous._data)
-                
             previous = previous._next
-            
         self.clean()
-                
+        return
 
     def combine(self, source1, source2):
         """
@@ -684,9 +630,6 @@ class List:
         """
 
         #your code goes here
-
-
-
 
     def split_alt(self):
         """
