@@ -1,16 +1,3 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = '2021-02-03'
-------------------------------------------------------------------------
-"""
-
-# pylint: disable=W0212
-
 from copy import deepcopy
 
 class Stack:
@@ -37,7 +24,6 @@ class Stack:
             a new Stack object (Stack)
         -------------------------------------------------------
         """
-        
         assert max_size > 0, "Queue size must be > 0"
  
         self._capacity = max_size
@@ -56,16 +42,7 @@ class Stack:
         """
         
         return self._top == -1
-        
-#         empty = False
 
-#         if self._values[0] == None:
-#             empty = True     
-#         
-#         return empty
-
-
-    
     def isFull(self):
         """
         -------------------------------------------------------
@@ -76,19 +53,11 @@ class Stack:
             True if stack is full, False otherwise
         -------------------------------------------------------
         """
-        
-#         full = True
-#         
-#         if self._top != None:
-#             full = False
-#         return full
-
         status = False
         if self._top == self._capacity:
             status = True
         
         return status
-
 
     def push(self, element):
         """
@@ -138,8 +107,6 @@ class Stack:
             value - a copy of the value at the top of stack (?)
         -------------------------------------------------------
         """
-        
-
         element = deepcopy(self._values[self._top])
         return element
 
@@ -172,9 +139,7 @@ class Stack:
             None
         -------------------------------------------------------
         """
-        
 
-    
         alternating = 0
         size = 0
     
@@ -191,25 +156,19 @@ class Stack:
                 self.push(source2._values[source2._top])  
                 source2._top -= 1    
                 size += 1  
-
             alternating += 1
                     
         while (size <= self.DEFAULT_SIZE):
-
-            size += 1
-            
+            size += 1  
             if source1._top == -1:
                 self.push(source2._values[source2._top])
                 source2._top -= 1
                 size += 1
-
             elif(source2._top == -1):
                 self.push(source1._values[source1._top])
                 source1._top -= 1
                 size += 1
-
-                
-        
+        return
 
     def split_alt(self):
         """
@@ -227,7 +186,6 @@ class Stack:
         target1 = Stack()
         target2 = Stack()
     
-    
         alternating = 0
         while(self._top != -1):
             alternating += 1
@@ -236,11 +194,7 @@ class Stack:
             elif (alternating % 2 == 1):
                 target1.push(self._values[self._top])
             self._top -= 1
-            
         return target1, target2       
-
-            
-        
 
     def __iter__(self):
         """
