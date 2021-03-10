@@ -1,17 +1,4 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = '2021-02-14'
-------------------------------------------------------------------------
-"""
-
 from copy import deepcopy
-
-
 
 class Deque:
     """
@@ -24,7 +11,6 @@ class Deque:
     
     def __init__(self, max_size = DEFAULT_SIZE):
         
-        
         assert max_size > 0, "Queue size must be > 0"
         
         self._capacity = max_size
@@ -33,8 +19,6 @@ class Deque:
         self._rear = 0
         self._top = -1
         self._count = 0
-        
-
     
     def insertFront(self, element):
         """
@@ -48,11 +32,9 @@ class Deque:
             None
         -------------------------------------------------------
         """
-        
         self._front = (self._front - 1) % self._capacity
         self._values[self._front] = deepcopy(element)
         self._count += 1
-
         return
         
     def insertEnd(self, element):
@@ -70,10 +52,8 @@ class Deque:
         self._rear = (self._rear + 1) % self._capacity
         self._values[self._rear] = deepcopy(element)
         self._count += 1
-        
         return
         
-
     def removeFront(self):
         """
         -------------------------------------------------------
@@ -85,8 +65,7 @@ class Deque:
             returned, the data element is removed from the queue (?)
         -------------------------------------------------------
         """
-#         assert not self.isEmpty(), "Cannot remove from an empty queue"
-
+        assert not self.isEmpty(), "Cannot remove from an empty queue"
         value = self._values[self._front]
         self._values[self._front] = None
         self._front = (self._front + 1) % self._capacity
@@ -103,16 +82,11 @@ class Deque:
             value - the value at the top of deque (?)
         -------------------------------------------------------
         """
-        
-        
+        assert not self.isEmpty(), "Cannot remove from an empty queue"
         value = self._values[self._rear]
         self._values[self._rear] = None
         self._rear = (self._rear + 1) % self._capacity
         self._count -= 1
-
-#         value = deepcopy(self._values[ self._rear])
-# 
-#         self._count -= 1
         return value
         
     def size(self):
@@ -142,8 +116,7 @@ class Deque:
 
         value = deepcopy(self._values[self._front])
         return value
-    
-    
+        
     def peekEnd(self):
         """
         -------------------------------------------------------
@@ -182,8 +155,6 @@ class Deque:
         -------------------------------------------------------
         """
         return self._count == self._capacity
-        
-
 
     def __iter__(self):
         """
@@ -204,25 +175,6 @@ class Deque:
             yield self._values[j]
             i += 1
             j = (j + 1) % self._capacity
-            
-
-        
-        
-        
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
