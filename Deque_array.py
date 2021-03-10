@@ -176,10 +176,3 @@ class Deque:
             i += 1
             j = (j + 1) % self._capacity
     
-    
-    
-    
-    
-    
-        
-        
