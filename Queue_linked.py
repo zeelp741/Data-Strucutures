@@ -1,18 +1,4 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = DATE
-------------------------------------------------------------------------
-"""
-
-# pylint: disable=W0212
-
 from copy import deepcopy
-
 
 class Node:
 
@@ -31,7 +17,6 @@ class Node:
         """
         self._data = deepcopy(element)
         self._next = None
-
 
 class Queue:
 
