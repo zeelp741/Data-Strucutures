@@ -1,17 +1,4 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = DATE
-------------------------------------------------------------------------
-"""
-# pylint: disable=W0212
-
 from copy import deepcopy
-
 
 class Node:
 
@@ -116,7 +103,6 @@ class Stack:
         self._count += 1
         return
 
-
     def pop(self):
         """
         -------------------------------------------------------
@@ -158,19 +144,6 @@ class Stack:
         temp._next = self._top
         self._top = temp
         return
-
-    def reverse(self):
-        """
-        -------------------------------------------------------
-        Reverses the contents of stack.
-        Use: stack.reverse()
-        -------------------------------------------------------
-        Returns:
-            None
-        -------------------------------------------------------
-        """
-        
-        #your code goes here
 
     def combine(self, source1, source2):
         """
@@ -257,7 +230,6 @@ class Stack:
             
         return target1, target2
              
-
     def __iter__(self):
         """
         USE FOR TESTING ONLY
