@@ -1,5 +1,20 @@
+"""
+------------------------------------------------------------------------
+[program description]
+------------------------------------------------------------------------
+Author: Zeel Patel
+ID:     200881210
+Email:  pate1210@mylaurier.ca
+__updated__ = DATE
+------------------------------------------------------------------------
+"""
+
+# pylint: disable=W0212
+
 # Imports
 from copy import deepcopy
+
+
 
 class DNode:
 
@@ -117,6 +132,7 @@ class Deque:
             value - the value at the front of deque (?)
         -------------------------------------------------------
         """
+        
         assert self._front is not None
         
         value = self._front._data
@@ -166,9 +182,13 @@ class Deque:
             a copy of the value at the front of deque (?)
         -------------------------------------------------------
         """
+
         assert self._front is not None
+        
         value = self._front._data
+        
         return deepcopy(value)
+    
     
     def peekEnd(self):
         """
@@ -182,8 +202,11 @@ class Deque:
         """
         
         assert self._rear is not None
+        
         value = self._rear._data
+        
         return deepcopy(value)
+
 
     def max(self):
         """
