@@ -166,12 +166,9 @@ class Deque:
         -------------------------------------------------------
         """
 
-        assert self._front is not None
-        
+        assert self._front is not None  
         value = self._front._data
-        
         return deepcopy(value)
-    
     
     def peekEnd(self):
         """
@@ -183,13 +180,9 @@ class Deque:
             a copy of the value at the rear of deque (?)
         -------------------------------------------------------
         """
-        
         assert self._rear is not None
-        
         value = self._rear._data
-        
         return deepcopy(value)
-
 
     def max(self):
         """
