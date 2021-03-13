@@ -1,9 +1,4 @@
-
-
-# Imports
 from copy import deepcopy
-
-
 
 class DNode:
 
@@ -87,7 +82,6 @@ class Deque:
         self._front = node
         self._front._next = current
         self._count += 1
-        
         return
 
     def insertEnd(self, element):
