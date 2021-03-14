@@ -102,7 +102,6 @@ class List:
         self._count +=1 
         return
 
-
     def insert(self, i, element):
         """
         -------------------------------------------------------
@@ -129,10 +128,8 @@ class List:
             self.append(element)
                                 
         else:
-            
             if i < 0:
                 i = self._count + i    
-            
             node = Node(element)                    # Add in the middle of the List - not to head or tail
             counter = 0
             
@@ -199,7 +196,7 @@ class List:
             if current._data > max_data:
                 max_data = current._data
             current = current._next     
-        return max_data
+        return deepcopy(max_data)
 
     def min(self):
         """
@@ -219,7 +216,7 @@ class List:
             if min_data > current._data:
                 min_data = current._data 
             current = current._next
-        return min_data
+        return deepcopy(min_data)
 
     def count(self, element):
         """
