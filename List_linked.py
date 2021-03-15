@@ -177,6 +177,46 @@ class List:
             index = -1
             
         return previous, current, index
+    def _linear_search_r(self, element):
+        
+        """
+        -------------------------------------------------------
+        Searches for the first occurrence of the given element
+        in the List.
+        Private helper method.
+        (recursive algorithm)
+        Use: previous, current, index = self._linear_search(element)
+        -------------------------------------------------------
+        Parameters:
+            element - a data element (?)
+        Returns:
+            previous - pointer to the node previous to the node containing the given element (Node)
+            current - pointer to the node containing the given element (Node)
+            index - index of the node containing the given element (int)
+        -------------------------------------------------------
+        """
+        
+        current = self._head
+        previous = None
+        index = 0
+        
+        if current == None:
+            index = -1
+            
+        else:
+            previous, current, index = self._linear_search_r_aux(element, previous, current, index)
+            
+        return previous, current, index
+            
+    def _linear_search_r_aux(self, element,  previous, current, index):
+        
+        if current == None:
+            index = -1
+        elif current._data is not element:
+            index += 1
+            previous, current, index = self._linear_search_r_aux(element, current, current._next, index)
+            
+        return previous, current, index
  
     def max(self):
         """
