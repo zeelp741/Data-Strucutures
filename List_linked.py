@@ -821,8 +821,66 @@ class List:
             target2 - contains other alternating values from self List (List)
         -------------------------------------------------------
         """
-        #your code goes here
+        target1 = List()
+        target2 = List()
+        left = True
+        
+        while self._head is not None:
+            
+            if left: 
+                target1._move_head_to_tail(self)
+            else:
+                target2._move_head_to_tail(self)
+            left = not left
+        
+        return target1, target2
+    
+    def split_alt_r(self):
+        """
+        -------------------------------------------------------
+        Splits the current list into separate target lists with data
+        elements alternating into the targets. At finish the current 
+        List is empty.
+        Order of the data elements is preserved.
+        (recursive algorithm)
+        Use: target1, target2 = lst.split_alt_r()
+        -------------------------------------------------------
+        Returns:
+            target1 - contains alternating values from self List (List)
+            target2 - contains other alternating values from self List (List)
+        -------------------------------------------------------
+        """
+        target1 = List()
+        target2 = List()
+        index = 0
+        
+        length = self._count
+        
+        if length == 0:
+            ans = target1, target2
+        else:
+            current = self._head
+            ans = self._split_alt_r_aux(current, target1, target2, index, length)
+        
 
+        return ans
+    
+    def _split_alt_r_aux(self, current, target1, target2, index, length):
+        
+        
+        if index == length:
+            ans = target1, target2 
+            
+        else:
+            if index % 2 == 0:
+                target1.append(current._data)
+            else:
+                target2.append(current._data)
+            
+            current = current._next
+            index += 1
+            ans = self._split_alt_r_aux(current, target1, target2, index, length)
+        return ans
 
     def __iter__(self):
         """
