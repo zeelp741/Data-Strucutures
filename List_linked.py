@@ -694,6 +694,38 @@ class List:
             previous = previous._next
         self.clean()
         return
+    
+    def union_r(self, source1, source2):
+        """
+        -------------------------------------------------------
+        Update the current list with all values that appear in
+        source1 and source2. Values do not repeat.
+        The values are added to the current List.
+        (iterative algorithm)
+        Use: lst.union(source1, source2)
+        -------------------------------------------------------
+        Parameters:
+            source1 - an linked list (List)
+            source2 - an linked list (List)
+        Returns:
+            None
+        -------------------------------------------------------
+        """
+        self._union_r_aux(source1._head)
+        self._union_r_aux(source2._head)
+        return
+
+    def _union_r_aux(self, source_node):
+        if source_node != None:
+            element = source_node._data
+            
+            _, current, _ = self._linear_search(element)
+            
+            if current == None:
+                self.append(element)
+                
+            source_node = self._union_r_aux(source_node._next)
+        return source_node    
 
     def combine(self, source1, source2):
         """
