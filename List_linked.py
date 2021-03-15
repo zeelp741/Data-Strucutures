@@ -565,6 +565,43 @@ class List:
             identical = True
         return identical        
 
+    
+    def is_identical_r(self, target):
+        """
+        ---------------------------------------------------------
+        Determines whether two lists are identical.
+        (recursive version)
+        Use: b = lst.is_identical(target)
+        -------------------------------------------------------
+        Parameters:
+            target - another list (List)
+        Returns:
+            identical - True if this list contains the same values as
+                target in the same order, otherwise False.
+        -------------------------------------------------------
+        """
+        
+        if self._count != target._count:
+            identical = False
+        else:
+            source_node = self._head
+            target_node = target._head
+            source_node, target_node = self._is_identical_r_aux(source_node, target_node)
+            
+            if source_node is None:
+                identical = True
+            else:
+                identical = False
+                
+        return identical
+            
+    def _is_identical_r_aux(self, source_node, target_node):
+        
+        if source_node != None and source_node._data == target_node._data:
+            source_node, target_node = self._is_identical_r_aux(source_node._next, target_node._next)
+        return  source_node, target_node    
+    
+    
     def intersection(self, source1, source2):
         """
         -------------------------------------------------------
