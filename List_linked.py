@@ -627,8 +627,44 @@ class List:
                     self.append(current._data)
                 previous = previous._next
             current = current._next
-
         return        
+    
+    def intersection_r(self, source1, source2):
+        """
+        -------------------------------------------------------
+        Update the current list with values that appear in both
+        source1 and source2. Values do not repeat.
+        The values are added to the current List.
+        (recursive algorithm)
+        Use: lst.intersection(source1, source2)
+        -------------------------------------------------------
+        Parameters:
+            source1 - a linked list (List)
+            source2 - a linked list (List)
+        Returns:
+            None
+        -------------------------------------------------------
+        """
+        
+        source_node = source1._head
+        self._intersection_r_aux( source_node, source2)
+        return
+        
+    def _intersection_r_aux(self, source_node, source2):
+        
+        if source_node != None:
+            element = source_node._data
+            
+            _, current, _ = source2._linear_search(element)
+            
+            if current != None:
+                _,current, _ = self._linear_search(element)
+            
+                if current == None:
+                    self.append(element)
+                
+            source_node = self._intersection_r_aux(source_node._next, source2)
+        return source_node    
 
     def union(self, source1, source2):
         """
