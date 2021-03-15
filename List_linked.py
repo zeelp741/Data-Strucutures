@@ -507,7 +507,51 @@ class List:
             None
         -------------------------------------------------------
         """
-        #your code goes here
+        
+        current = None
+        
+        if self._head != None:
+            self._tail = self._head
+            self._head = self._head._next
+            self._tail._next = None
+            current = self._tail
+            
+        while self._head != None:
+            holder = self._head._next
+            self._head._next = current
+            current = self._head
+            self._head = holder
+        
+        self._head = current
+        return
+        
+    def reverse_r(self):
+        """
+        -------------------------------------------------------
+        Reverses the order of the elements in list.
+        (recursive algorithm)
+        Use: lst.reverse()
+        -------------------------------------------------------
+        Returns:
+            None
+        -------------------------------------------------------
+        """
+        
+        self._tail = self._head
+        self._reverse_r_aux(None)
+        return
+        
+    def _reverse_r_aux(self, new_front):
+        
+        if self._head == None:
+            self._head = new_front
+        else:
+            temp = self._head._next
+            self._head._next = new_front
+            new_front = self._head
+            self._head = temp
+            self._reverse_r_aux(new_front)
+        return
 
 
     def clean(self):
