@@ -1,16 +1,4 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = '2021-03-03'
-------------------------------------------------------------------------
-"""
-
 from copy import deepcopy
-
 
 class Node:
 
@@ -29,7 +17,6 @@ class Node:
         """
         self._data = deepcopy(element)
         self._next = None
-
 
 class Queue:
 
@@ -59,7 +46,6 @@ class Queue:
             True if queue is empty, False otherwise.
         -------------------------------------------------------
         """
-        
         return self._count == 0
     
     def isFull(self):
@@ -72,7 +58,6 @@ class Queue:
             True if queue is full, False otherwise.
         -------------------------------------------------------
         """
-
         return False
 
     def size(self):
@@ -85,7 +70,6 @@ class Queue:
             the number of data elements in the queue.
         -------------------------------------------------------
         """
-    
         return self._count
     
     def __len__(self):
@@ -98,7 +82,6 @@ class Queue:
             the number of data elements in the queue.
         -------------------------------------------------------
         """
-
         return self._count
 
     def enqueue(self, element):
