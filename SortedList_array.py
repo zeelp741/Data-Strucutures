@@ -1,18 +1,5 @@
-"""
-------------------------------------------------------------------------
-[program description]
-------------------------------------------------------------------------
-Author: Zeel Patel
-ID:     200881210
-Email:  pate1210@mylaurier.ca
-__updated__ = '2021-01-31'
-------------------------------------------------------------------------
-"""
-# pylint: disable=W0212
-
 # Imports
 from copy import deepcopy
-
 
 class SortedList:
     DEFAULT_SIZE = 5
@@ -44,7 +31,6 @@ class SortedList:
             True if slst is empty, False otherwise.
         -------------------------------------------------------
         """
-        
         return self._count == 0
         
     def isFull(self):
@@ -57,11 +43,8 @@ class SortedList:
             True if the List is full, False otherwise.
         -------------------------------------------------------
         """
-
-        
         return self._count >= self._capacity
  
-
     def __len__(self):
         """
         -------------------------------------------------------
@@ -72,9 +55,7 @@ class SortedList:
             the number of data elements in sorted List.
         -------------------------------------------------------
         """
-        
         return self._count
-
 
     def insert(self, element):
         """
@@ -174,9 +155,7 @@ class SortedList:
         -------------------------------------------------------
         """
         
-        
         assert not self.isEmpty(), "cannot remove from an empty List"
-        
         
         state = False
         count = 0;
@@ -206,7 +185,6 @@ class SortedList:
         """
         
         i = self._binary_search(element)
-
         return i > -1
 
     def peek(self):
@@ -221,7 +199,6 @@ class SortedList:
         """
         
         assert not self.isEmpty(), "Cannot peek at an empty List"
-
         element = deepcopy(self._values[0])
         return element
 
@@ -241,10 +218,8 @@ class SortedList:
         """
 
         index = self._binary_search(element)
-        
         counter = 0;
         value = -1;
-        
         
         for i in range(self._count):
             if element == self._values[i]:
@@ -269,7 +244,6 @@ class SortedList:
         """
         
         state = False
-        
         if i < self._count and i >= self._count * -1:
             state = True
             
@@ -308,11 +282,8 @@ class SortedList:
             True if slst contains key, False otherwise. (boolean)
         -------------------------------------------------------
         """
-        
         i = self._binary_search(element)
         return i > -1
-
-
 
     def max(self):
         """
@@ -324,12 +295,8 @@ class SortedList:
             value - a copy of the maximum data element in the List (?)
         -------------------------------------------------------
         """
-                                
         value = deepcopy(self._values[self._count -1 ])
-                
         return value
-
-
 
     def min(self):
         """
@@ -341,14 +308,9 @@ class SortedList:
             value - a copy of the minimum data element in source (?)
         -------------------------------------------------------
         """
-                
-        
         value = deepcopy(self._values[0])
-        
         return value
 
-
-   
     def count(self, element):
         """
         -------------------------------------------------------
@@ -367,10 +329,7 @@ class SortedList:
         for i in range(self._capacity):
             if element == self._values[i]:
                 number += 1
-                
         return number
-
-
 
     def clean(self):
         """
@@ -395,9 +354,8 @@ class SortedList:
                 
         self._values = new_list._values
         self._count = new_list._count
+        return
         
-
-
     def intersection(self, source1, source2):
         """
         -------------------------------------------------------
@@ -424,8 +382,8 @@ class SortedList:
                     
         self._values = new_lst._values
         self._count = new_lst._count
+        return
         
-
     def union(self, source1, source2):
         """
         -------------------------------------------------------
@@ -441,26 +399,17 @@ class SortedList:
         -------------------------------------------------------
         """
         new_lst = SortedList(self._capacity)
-        
         for i in source1._values:
-             
             if i not in new_lst._values:
-                 
                 new_lst.insert(i)
-         
+                
         for i in source2._values:
-             
             if i not in new_lst._values:
-                 
                     new_lst.insert(i)
-        
-
                 
         self._values = new_lst._values
-            
         self._count = new_lst._count
-
-
+        return
 
     def remove_many(self, element):
         """
@@ -475,23 +424,15 @@ class SortedList:
         ---------------------------------------------------------
         """
         
-        
         counter = 0
-        
         for i in self._values:
-            
-            
             if i == element:
-                
-                
                 counter += 1;
         
         for i in range(counter):
-            
             self.remove(element)
-
-
-
+        return        
+  
     def split_alt(self):
         """
         -------------------------------------------------------
@@ -518,14 +459,9 @@ class SortedList:
                 
         for i in range(self._capacity):
             self._values[i] = None
-            
-            
-            
-        self._count = 0
-        
-        
-        return target1, target2
 
+        self._count = 0
+        return target1, target2
 
     def split(self):
         """
@@ -560,86 +496,7 @@ class SortedList:
         target2._count = midpoint
         
         self._count = 0
-        
-        
         return target1, target2
-
-
-
-    def split_key(self, key):
-        """
-        ---------------------------------------------------------
-        Splits a List into two parts. target1 contains all values < key,
-        target2 all values >= key. The List becomes empty at end.
-        Use:  target1, target2 = source.split_key(key)
-        -------------------------------------------------------
-        Parameters:
-            key - a key value (?)
-        Returns:
-            target1 - a new Sorted List with values < key (Sorted_List)
-            target2 - a new Sorted List with values >= key (Sorted_List)
-        -------------------------------------------------------
-        """
-        # your code goes here
-
-
-
-    def split_apply(self, func):
-        """
-        -------------------------------------------------------
-        Splits a List into two parts. target1 contains all the values
-        where the result of calling func(value) is True, target2 contains
-        the remaining values. At finish, the List is empty. Order of values
-        in targets is maintained.
-        Use: target1, target2 = slst.split_apply(func)
-        -------------------------------------------------------
-        Parameters:
-            func - a function that given a value in the list returns
-                True for some condition, otherwise returns False.
-        Returns:
-            target1 - a new List with values where func(value) is True (List)
-            target2 - a new List with values where func(value) is False (List)
-        -------------------------------------------------------
-        """
-        # your code goes here
-
-
-
-    def copy(self):
-        """
-        ---------------------------------------------------------
-        Copies the contents of the List to another sorted list.
-        Use: target = slst.copy()
-        -------------------------------------------------------
-        Returns:
-            target - a sorted list containing a copy of the contents
-                of the List (Sorted_List)
-        -------------------------------------------------------
-        """
-        # your code goes here
-
-
-
-    def combine(self, source1, source2):
-        """
-        -------------------------------------------------------
-        Combines two source lists into the current list.
-        When finished, the contents of source1 and source2 are interlaced
-        into the current List and source1 and source2 are empty.
-        Values are sorted.
-        (iterative algorithm)
-        Use: slst.combine(source1, source2)
-        -------------------------------------------------------
-        Parameters:
-            source1 - an array-based list (Sorted_List)
-            source2 - an array-based list (Sorted_List)
-        Returns:
-            None
-        -------------------------------------------------------
-        """
-        # your code goes here
-
-
 
     def is_identical(self, target):
         """
@@ -659,7 +516,6 @@ class SortedList:
         count = 0
         identical = False
         
-        
         for i in range(self._count):
             if self._values[i] == target._values[i]:
                 count += 1
@@ -671,10 +527,6 @@ class SortedList:
             identical = True
             
         return identical
-
-            
-
-
 
     def remove_front(self):
         """
@@ -688,13 +540,8 @@ class SortedList:
         """
         # your code goes here
         value = self._values[self._front]
-        
         self.remove(value)
-        
         return value        
-
-
-
 
     def __iter__(self):
         """
@@ -710,7 +557,3 @@ class SortedList:
         """
         for value in self._values:
             yield value
-
-        # your code goes here
-
-
