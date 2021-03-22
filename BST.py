@@ -270,7 +270,9 @@ class BST:
             a - copy of the contents of the tree in inorder (Python list of ?)
         -------------------------------------------------------
         """
-        #your code here
+        a = []
+        self._inorder_aux(self._root, a)
+        return a
 
     def _inorder_aux(self, node, a):
         """
@@ -287,7 +289,12 @@ class BST:
             None
         ---------------------------------------------------------
         """
-        #your code here
+        if node is not None:
+            self._inorder_aux(node._left, a)
+            a.append(node._data)
+            self._inorder_aux(node._right, a)
+
+        return
 
     def preorder(self):
         """
@@ -299,7 +306,9 @@ class BST:
             a - copy of the contents of the tree in preorder (Python list of ?)
         -------------------------------------------------------
         """
-        #your code here
+        a = []
+        self._preorder_aux(self._root, a)
+        return a
 
     def _preorder_aux(self, node, a):
         """
@@ -316,7 +325,12 @@ class BST:
             None
         ---------------------------------------------------------
         """
-        #your code here
+        if node is not None:
+            a.append(node._data)
+            self._preorder_aux(node._left, a)
+            self._preorder_aux(node._right, a)
+
+        return
 
     def postorder(self):
         """
@@ -328,6 +342,9 @@ class BST:
             a - copy of the contents of the tree in postorder (list of ?)
         -------------------------------------------------------
         """
+        a = []
+        self._postorder_aux(self._root, a)
+        return a
 
     def _postorder_aux(self, node, a):
         """
@@ -344,7 +361,12 @@ class BST:
             None
         ---------------------------------------------------------
         """
-        #your code here
+        if node is not None:
+            self._postorder_aux(node._left, a)
+            self._postorder_aux(node._right, a)
+            a.append(node._data)
+
+        return   
 
     def levelorder(self):
         """
