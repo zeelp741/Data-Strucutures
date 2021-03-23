@@ -380,7 +380,22 @@ class BST:
             (Python list of ?)
         -------------------------------------------------------
         """
-        #your code here
+        values = []
+
+        if self._root is not None:
+            queue = []
+            queue.append(self._root)
+
+            while len(queue) > 0:
+                node = queue.pop(0)
+                values.append(node._data)
+
+                if node._left is not None:
+                    queue.append(node._left)
+                if node._right is not None:
+                    queue.append(node._right)
+
+        return values
 
 
     def is_balanced(self):
@@ -394,7 +409,8 @@ class BST:
             is_balanced - True if the bst is balanced, False otherwise (boolean)
         ---------------------------------------------------------
         """
-        #your code here
+        is_balanced = self._is_balanced_aux(self._root)
+        return is_balanced
 
     def _is_balanced_aux(self, node):
         """
@@ -409,7 +425,19 @@ class BST:
             is_balanced - True if node is balanced, False otherwise (boolean)
         ---------------------------------------------------------
         """
-        #your code goes here
+        #Base case: 
+            # No node exists
+        if node is None:
+            is_balanced = True
+        else:
+                # Checks if left tree is balanced
+            left = self._is_balanced_aux(node._left)
+                # Checks if right tree is balanced
+            right = self._is_balanced_aux(node._right)
+
+            is_balanced = abs(left - right) <= 1
+
+        return is_balanced
 
 
     def is_identical(self, other):
@@ -425,7 +453,7 @@ class BST:
             in the same order as other, otherwise returns False (boolean)
         -------------------------------------------------------
         """
-        #your code here
+        return self._is_identical_aux(self._root, other._root)
 
     def _is_identical_aux(self, node1, node2):
         """
@@ -443,7 +471,27 @@ class BST:
                 in the same order, otherwise returns False (boolean)
         -------------------------------------------------------
         """
-        #your code goes here
+        if node1 is None or node2 is None:
+            if node1 is None and node2 is None:
+                identical = True
+            else:
+                identical = False
+
+        elif node1._left is None:
+            if node2._left is None:
+                identical = True
+            else:
+                identical = False
+
+        elif node1._right is None:
+            if node2._right is None:
+                identical = True
+            else:
+                identical = False
+
+        else:
+            identical = self._is_identical_aux(node1._left, node2._left) and self._is_identical_aux(node1._right, node2._right)
+        return identical
 
     def is_valid(self):
         """
@@ -458,7 +506,7 @@ class BST:
             valid - True if tree is a BST, False otherwise (boolean)
         ---------------------------------------------------------
         """
-        #your code goes here
+        return self._is_valid_aux(self._root)
 
     def _is_valid_aux(self, node):
         """
@@ -472,7 +520,35 @@ class BST:
             valid - True if node is root of a valid BST, False otherwise (boolean)
         ---------------------------------------------------------
         """
-        #your code goes here
+            # Base case:
+                # Node doesnt exist    
+        if node is None:
+            valid = True
+        elif node._left is None:
+                # Node doens't have a left subtree
+            valid = True
+        elif node._right is None:
+                # Node doesn't have a right subtree
+            valid = True
+        else:
+                # Node has two children
+            valid = False
+
+
+                # Checks to see if left child is smaller than right
+            if node._left._data < node._data:
+                valid = True
+
+                # Check to see if right node is greater than current node
+            if node._right._data > node._data and valid:
+                valid = True
+
+                # Height should be 
+            height = self._node_height(node)
+            if height == node._height + 1:
+                valid = True
+            
+        return valid
     
     def min(self):
         """
