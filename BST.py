@@ -560,7 +560,15 @@ class BST:
             element - a copy of the minimum element in the BST (?)
         -------------------------------------------------------
         """
-        #your code goes here
+        node = self._root
+        parent = None
+
+        while node is not None:
+            parent = node
+            node = node._left
+
+        element = parent._data
+        return element
     
     def leaf_count(self):
         """
@@ -573,7 +581,7 @@ class BST:
             count - number of nodes with no children in bst (int)
         ---------------------------------------------------------
         """
-        #your code goes here
+        return self._leaf_count_aux(self._root)
 
     def _leaf_count_aux(self, node):
         """
@@ -589,7 +597,16 @@ class BST:
                 rooted at node (int)
         ---------------------------------------------------------
         """
-        #your code goes here
+        if node is None:
+            count = 0
+        
+        elif node._left is None and node._right is None:
+            count = 1
+
+        else:
+            count = self._leaf_count_aux(node._left) + self._leaf_count_aux(node._right)
+        
+        return count
 
     def one_child_count(self):
         """
@@ -601,7 +618,7 @@ class BST:
             count - number of nodes with one child in bst (int)
         ----------------------------------------------------------
         """
-        #your code goes here
+        return self._one_child_count_aux(self._root)
 
     def _one_child_count_aux(self, node):
         """
@@ -617,7 +634,18 @@ class BST:
         ----------------------------------------------------------
         """
 
-        #your code goes here
+        if node is None:
+            count = 0
+
+        elif not node._right is None and node._left is None:
+            count = 1 + self._one_child_count_aux(node._right)
+
+        elif not node._left is None and node._right is None :
+            count = 1 + self._one_child_count_aux(node._left)
+
+        else:
+            count = self._one_child_count_aux(node._left) + self._one_child_count_aux(node._right)
+        return count
 
     def two_child_count(self):
         """
@@ -629,7 +657,7 @@ class BST:
             count - number of nodes with two children in bst (int)
         ----------------------------------------------------------
         """
-        #your code goes here
+        return self._two_child_count_aux(self._root)
 
     def _two_child_count_aux(self, node):
         """
@@ -645,7 +673,16 @@ class BST:
         ----------------------------------------------------------
         """
 
-        #your code goes here
+        if node is None:
+            count = 0
+
+        elif node._right is not None and node._left is not None:
+            count = 1 + self._two_child_count_aux(node._left) + self._two_child_count_aux(node._right)
+
+        else:
+            count = self._two_child_count_aux(node._left) + self._two_child_count_aux(node._right)
+
+        return count
     
     def remove_root(self):
         """
