@@ -1,16 +1,3 @@
-"""
--------------------------------------------------------
-Array version of the Priority Queue ADT.
--------------------------------------------------------
-Author:  David brown and Masoomeh Rudafshani 
-ID:      999999999 and 123456789
-Email:   dbrown@wlu.ca and mrudafshani@wlu.ca
-Section: CP164 OC
-__updated__ = "2021-01-28"
--------------------------------------------------------
-"""
-# pylint: disable=W0212
-
 # Imports
 from copy import deepcopy
 
@@ -46,7 +33,6 @@ class PriorityQueue:
             True if priority queue is empty, False otherwise.
         -------------------------------------------------------
         """
-        
         return self._count == 0
 
     def isFull(self):
@@ -59,7 +45,6 @@ class PriorityQueue:
             True if priority queue is full, False otherwise.
         -------------------------------------------------------
         """
-        
         return self._count ==  self._capacity
     
     def __len__(self):
@@ -147,7 +132,6 @@ class PriorityQueue:
             for x in range(len(self._values)):
                 if self._values[x] < self._values[self._first]:
                     self._first = x
-
         return
 
     def remove(self):
