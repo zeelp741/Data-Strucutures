@@ -1,10 +1,23 @@
+"""
+-------------------------------------------------------
+Array version of the Priority Queue ADT.
+-------------------------------------------------------
+Author:  David brown and Masoomeh Rudafshani 
+ID:      999999999 and 123456789
+Email:   dbrown@wlu.ca and mrudafshani@wlu.ca
+Section: CP164 OC
+__updated__ = "2021-01-28"
+-------------------------------------------------------
+"""
+# pylint: disable=W0212
+
 # Imports
 from copy import deepcopy
 
 
 class PriorityQueue:
 
-    DEFAULT_SIZE = 10
+    DEFAULT_SIZE = 60
     def __init__(self, max_size=DEFAULT_SIZE):
         """
         -------------------------------------------------------
@@ -33,19 +46,7 @@ class PriorityQueue:
             True if priority queue is empty, False otherwise.
         -------------------------------------------------------
         """
-        return self._count == 0
-
-    def isFull(self):
-        """
-        -------------------------------------------------------
-        Determines if the priority queue is full.
-        Use: b = pq.isFull()
-        -------------------------------------------------------
-        Returns:
-            True if priority queue is full, False otherwise.
-        -------------------------------------------------------
-        """
-        return self._count ==  self._capacity
+        #your code here
     
     def __len__(self):
         """
@@ -57,19 +58,7 @@ class PriorityQueue:
             the number of elements in the priority queue.
         -------------------------------------------------------
         """
-        return self._count
-
-    def size(self):
-        """
-        -------------------------------------------------------
-        Returns the size of the priority queue.
-        Use: n = len(pq)
-        -------------------------------------------------------
-        Returns:
-            the number of elements in the priority queue.
-        -------------------------------------------------------
-        """
-        return self._count
+        #your code here
 
     def insert(self, element):
         """
@@ -86,17 +75,8 @@ class PriorityQueue:
             None
         -------------------------------------------------------
         """
-        assert self._count < self._capacity, "Not enough space"
-
-        
-        if self._first is None:
-            self._first = 0
-        elif element < self._values[self._first]:
-            self._first = self._count
-
-        self._values[self._count] = deepcopy(element)
-        self._count += 1
-        return None                
+        #your code here
+                      
 
     def _set_first(self):
         """
@@ -110,29 +90,7 @@ class PriorityQueue:
             None
         -------------------------------------------------------
         """
-        # if len(self._values) == 0:
-        #     self._first = None
-        # else:
-        #     self._first = 0
-        
-        # for x in range(len(self._values)):
-        #     if self._values[x] < self._values[self._first]:
-        #         self._first = x
-
-        # return None
-
-        if self._count == 1:
-            self._first = 0
-
-        elif self._count == 0:
-            self._first = None
-
-        else:
-            self._first = 0
-            for x in range(len(self._values)):
-                if self._values[x] < self._values[self._first]:
-                    self._first = x
-        return
+        #your code here
 
     def remove(self):
         """
@@ -145,35 +103,7 @@ class PriorityQueue:
                 the element is removed from the priority queue. (?)
         -------------------------------------------------------
         """
-
-        assert not self._count == 0, "Queue is Empty"
-        
-        element = deepcopy(self._values[self._first])
-        if self._first != self._count -1:
-
-            for i in range(self._first, self._count - 1):
-                self._values[i] = self._values[i+1]
-
-            self._values[ self._count - 1] = None
-            self._count -= 1
-        else:
-            self._values[self._first] = None
-            self._count -= 1
-        
-        index = 0
-        if self._count != 0:
-            temp = self._values[0]
-
-            for i in range(self._count):
-                if self._values[i] < temp:
-                    temp = self._values[i]
-                    index = i
-
-        else:
-
-            index = None
-        self._first = index
-        return element
+        #your code here
 
     def peek(self):
         """
@@ -186,9 +116,8 @@ class PriorityQueue:
                 the element is not removed from the priority queue. (?)
         -------------------------------------------------------
         """
-        assert self.isEmpty() == 0, "Cannot peek at an empty priority queue"
-        value = deepcopy(self._values[self._first])
-        return value
+        #your code here
+
 
     def __iter__(self):
         """
@@ -204,7 +133,3 @@ class PriorityQueue:
         """
         for value in self._values:
             yield value
-
-    # def print(self):
-    #     for value in self._values:
-    #         print(value)
