@@ -1,20 +1,5 @@
-"""
--------------------------------------------------------
-maxHeap version of the Priority Queue ADT.
--------------------------------------------------------
-Author:  Masoomeh Rudafshani
-ID:      123456789
-Email:   mrudafshani@wlu.ca
-Section: CP164 OC
-__updated__ = "2021-01-20"
--------------------------------------------------------
-"""
-# pylint: disable=W0212
-
 # Imports
 from copy import deepcopy
-
-
     
 class PriorityQueue:
     
