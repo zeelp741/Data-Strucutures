@@ -1,19 +1,5 @@
-"""
--------------------------------------------------------
-Array version of the Priority Queue ADT.
--------------------------------------------------------
-Author:  David brown and Masoomeh Rudafshani 
-ID:      999999999 and 123456789
-Email:   dbrown@wlu.ca and mrudafshani@wlu.ca
-Section: CP164 OC
-__updated__ = "2021-01-28"
--------------------------------------------------------
-"""
-# pylint: disable=W0212
-
 # Imports
 from copy import deepcopy
-
 
 class PriorityQueue:
 
