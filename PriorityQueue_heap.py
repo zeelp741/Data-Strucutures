@@ -18,7 +18,12 @@ class PriorityQueue:
             a new PriorityQueue object (PriorityQueue)
         -------------------------------------------------------
         """        
-        # your code here
+        assert max_size > 0, "Heap size must be > 0"
+
+
+        self._capacity = max_size
+        self._values = [None] * self._capacity
+        self._size = 0
 
     def isEmpty(self):
         """
@@ -30,7 +35,8 @@ class PriorityQueue:
             True if priority queue is empty, False otherwise.
         -------------------------------------------------------
         """
-        # your code here
+        
+        return self._size == 0
 
     def __len__(self):
         """
@@ -43,7 +49,7 @@ class PriorityQueue:
         -------------------------------------------------------
         """
              
-        # your code here
+        return self._size
         
     def insert(self, element):
         """
@@ -60,8 +66,24 @@ class PriorityQueue:
             None
         -------------------------------------------------------
         """
-        # your code here
-           
+        assert not self._size == self._capacity - 1, "Heap is Full"
+
+        self._values [self._size] = deepcopy(element)
+        i = self._size
+        self._size += 1
+
+        while i > 0:
+            parent = (i - 1) // 2   
+
+            if self._values[i] > self._values[parent]:
+                temp = self._values[i]
+                self._values[i] = self._values[parent]
+                self._values[parent] = temp
+                i = parent
+
+            else:
+                return
+ 
     def remove(self):
         """
         -------------------------------------------------------
@@ -76,7 +98,34 @@ class PriorityQueue:
         -------------------------------------------------------
         """
    
-        # your code here
+        assert self._size > 0, "Cannot remove from an empty priority queue"
+
+        element = deepcopy(self._values[0])
+
+        self._values[0] = self._values[self._size - 1]
+        self._values[self._size - 1] = None
+        self._size -= 1
+
+        i = 0
+
+        child = 2 * i + 1
+
+        while child < self._size:
+            if child != self._size - 1 and self._values[child] > self._values[child + 1]:
+                child = child + 1
+
+            if self._values [i] > self._values[child]:
+                temp = self._values[i]
+                self._values[i] = self._values[child]
+                self._values[child] = temp
+
+            i = child
+            child = 2 * i + 1
+
+        else:
+            return element
+
+
 
     def peek(self):
         """
@@ -93,7 +142,7 @@ class PriorityQueue:
                 queue. (?)
         -------------------------------------------------------
         """
-        # your code here
+        return self._values[0]
     
     def __iter__(self):
         """
@@ -109,3 +158,4 @@ class PriorityQueue:
         """
         for element in self._values:
             yield element
+
