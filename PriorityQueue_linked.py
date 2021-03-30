@@ -1,7 +1,6 @@
 # Imports
 from copy import deepcopy
 
-
 class PQNode:
 
     def __init__(self, element):
@@ -17,7 +16,8 @@ class PQNode:
             a new PriorityQueue object (PQNode)
         -------------------------------------------------------
         """
-        #your code here
+        self._next = None
+        self._value = deepcopy(element)
 
 class PriorityQueue:
 
@@ -31,7 +31,9 @@ class PriorityQueue:
             a new PriorityQueue object (PriorityQueue)
         -------------------------------------------------------
         """
-        #your code here
+        self._front = None
+        self._rear = None
+        self._count = 0 
 
     def isEmpty(self):
         """
@@ -43,7 +45,7 @@ class PriorityQueue:
             True if priority queue is empty, False otherwise.
         -------------------------------------------------------
         """
-        #your code here
+        return self._count == 0
 
     def __len__(self):
         """
@@ -55,7 +57,7 @@ class PriorityQueue:
             the number of elements in the priority queue.
         -------------------------------------------------------
         """
-        #your code here
+        return self._count
 
     def insert(self, element):
         """
@@ -71,7 +73,33 @@ class PriorityQueue:
             None
         -------------------------------------------------------
         """
-        #your code here
+        current = self._front
+        previous = None
+        while current is not None and current._value < element:
+            previous = current
+            current = current._next
+        if current is None:
+            # Reached end of Queue or Queue empty
+            new_node = PQNode(element)
+            if self._count == 0:
+                self._rear = new_node
+                self._front = new_node
+            else:
+                # Reached end of Queue
+                self._rear._next = new_node
+                self._rear = new_node
+            self._count += 1
+        else:
+            # Somewhere in Queue
+            new_node = PQNode(element)
+            if previous is None:
+                # Beginning of Queue
+                self._front = new_node
+            else:
+                # Not beginning, update references
+                previous._next = new_node
+            self._count += 1
+        return
 
     def remove(self):
         """
@@ -85,8 +113,17 @@ class PriorityQueue:
                 the element is removed from the priority queue. (?)
         -------------------------------------------------------
         """
-        #your code here
+        assert self._count > 0, "Cannot remove from an empty priority queue"
+        element = self._front._value
 
+        self._front = self._front._next
+
+        self._count -= 1
+
+        if self._count == 0:
+            self._rear = None
+
+        return deepcopy(element)
 
     def peek(self):
         """
@@ -99,7 +136,8 @@ class PriorityQueue:
                 the element is not removed from the priority queue. (?)
         -------------------------------------------------------
         """
-        #your code here
+        assert self._count > 0, "Cannot peek at an empty priority queue"
+        return deepcopy(self._front._value)
 
 
     def __iter__(self):
@@ -119,3 +157,5 @@ class PriorityQueue:
         while curr is not None:
             yield curr._value
             curr = curr._next
+
+
