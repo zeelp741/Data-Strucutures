@@ -1,17 +1,3 @@
-"""
--------------------------------------------------------
-Array-based list version of the Hash Set ADT.
-The elements in each list are sorted
--------------------------------------------------------
-Author:  David Brown and Masoomeh Rudafshani
-ID:      123456789
-Email:   dbrown@wlu.ca, mrudafshani@wlu.ca
-Section: CP164 OC
-__updated__ = "2021-01-20"
--------------------------------------------------------
-"""
-# pylint: disable=W0212
-
 # Imports
 # Use any appropriate data structure here.
 from SortedList_array import SortedList
