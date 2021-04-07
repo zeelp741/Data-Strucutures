@@ -708,7 +708,8 @@ class BST:
             True if the bst contains key, False otherwise (boolean)
         -------------------------------------------------------
         """
-        #your code goes here
+        value = self.find(element)
+        return value is not None
 
     def height(self):
         """
@@ -736,7 +737,33 @@ class BST:
             node containing key, None if the key is not found. (?)
         ---------------------------------------------------------
         """
-        #your code goes here
+        assert self._root is not None, "Cannot locate a parent in an empty BST"
+
+        # Find the node containing the key.
+        node = self._root
+        parent = None
+        found = False
+
+        while node is not None and found is False:
+
+            if key < node._data:
+                parent = node
+                node = node._left
+
+            elif key > node._data:
+                parent = node
+                node = node._right
+
+            else:
+                found = True
+
+        if parent is None or not found:
+            element = None
+
+        else:
+
+            element = deepcopy(parent._data)
+        return element
 
     def parent_r(self, element):
         """
@@ -752,7 +779,10 @@ class BST:
             parent.
         ---------------------------------------------------------
         """
-        #your code goes here
+        assert self._root is not None, "Cannot locate a parent in an empty BST"
+
+        # Find the node containing the key _value.
+        return self._parent_aux(self._root, element, None)
 
 
     def _parent_aux(self, node, element, parent):
@@ -771,7 +801,22 @@ class BST:
             data - the _data of the parent node, None if it has no parent (?)
         ---------------------------------------------------------
         """
-        #your code goes here
+        if node is None:
+
+            value = None
+        elif element < node._data:
+
+            value = self._parfent_aux(node._left, element, node)
+        elif element > node._data:
+
+            value = self._parent_aux(node._right, element, node)
+        elif parent is None:
+
+            value = None
+        else:
+
+            value = deepcopy(parent._data)
+        return valuefn
 
     def max(self):
         """
@@ -857,8 +902,8 @@ class BST:
             two -  number of nodes with two children (int)
         ----------------------------------------------------------
         """
-
-        #your code goes here
+        zero, one, two = self._node_counts_aux(self._root)
+        return zero, one, two
 
     def _node_counts_aux(self, node):
         """
@@ -874,7 +919,38 @@ class BST:
             two -  number of nodes with two children (int)
         ----------------------------------------------------------
         """
-        #your code goes here
+        if node is None:
+
+            one = 0
+            two = 0
+            zero = 0
+
+        elif node._left is None and node._right is None:
+
+            one = 0
+            two = 0
+            zero = 1
+
+        elif node._left is not None and node._right is None:
+
+            zero, one, two = self._node_counts_aux(node._left)
+            one += 1
+
+        elif node._left is None and node._right is not None:
+
+            zero, one, two = self._node_counts_aux(node._right)
+            one += 1
+
+        else:
+
+            zero_l, one_l, two_l = self._node_counts_aux(node._left)
+            zero_r, one_r, two_r = self._node_counts_aux(node._right)
+            zero = zero_l + zero_r
+            one = one_l + one_r
+
+            two = two_l + two_r + 1
+
+        return zero, one, two
 
     def mirror(self):
         """
