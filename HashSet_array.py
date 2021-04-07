@@ -83,7 +83,14 @@ class HashSet:
             True if the Hash Set contains key, False otherwise.
         -------------------------------------------------------
         """
-        # your code here
+        contains = False
+
+        index = self._hashfunction(element)
+        slot_table = self._table[index]
+        if element in slot_table:
+            contains = True
+
+        return contains
 
     def insert(self, element):
         """
@@ -128,7 +135,14 @@ class HashSet:
             element - if it exists in the Hash Set, None otherwise.
         -------------------------------------------------------
         """
-       #your code here
+        found = None
+        index = self._hashfunction(element)
+        slot_table = self._table[index]
+
+        if element in slot_table:
+            found = deepcopy(element)
+        
+        return found
 
 
     def remove(self, element):
@@ -145,7 +159,16 @@ class HashSet:
         -------------------------------------------------------
         """
         
-        #your code here
+        found  = False
+        index = self._hashfunction(element)
+        slot_table = self._table[index]
+
+        if element in slot_table:
+            slot_table.remove(element)
+            found = True
+            self._count -= 1
+        
+        return found
     
     def _rehash(self):
         """
@@ -160,7 +183,22 @@ class HashSet:
         -------------------------------------------------------
         """
 
-        #your code here
+        CHANGE_FACTOR = 2 * self._TableSize + 1    
+        slots = CHANGE_FACTOR - self._TableSize    
+        self._TableSize = CHANGE_FACTOR    
+            
+        for i in range(slots):    
+            self._table.append(List())    
+            
+        for i in self._table:    
+            for j in i:    
+                if j is not None:    
+                    h = hash(j)    
+                    index = h % self._TableSize    
+                    slot_table = self._table[index]    
+                    if j not in slot_table:    
+                        slot_table.insert(0,j)    
+        return
 
         
     def is_identical(self, target):
