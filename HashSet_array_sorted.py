@@ -1,5 +1,6 @@
 # Imports
 # Use any appropriate data structure here.
+from copy import deepcopy
 from SortedList_array import SortedList
 
 # Constants
@@ -29,7 +30,8 @@ class HashSet:
         self._table = [None] * self._TableSize
         self._count = 0
 
-        # your code goes here.
+        for i in range(self._TableSize):
+            self._table[i] = SortedList()
 
     def __len__(self):
         """
@@ -82,7 +84,14 @@ class HashSet:
         -------------------------------------------------------
         """
 
-        # your code goes here
+        found  = False
+        index = self._hashfunction(key)
+        slot_table = self._table[index]
+
+        if key in slot_table:
+            found = True
+        
+        return found
 
 
     def insert(self, element):
@@ -99,7 +108,24 @@ class HashSet:
             inserted - True if value is inserted, False otherwise.
         -------------------------------------------------------
         """
-        #your code goes here        
+        index = self._hashfunction(element)
+        slot_list = self._table[index]     
+
+        # Doesnt insert data if its already in the hash set`     
+        if element in slot_list:
+                   
+            inserted = False
+        else:
+            inserted = True
+            self._count += 1
+            slot_list.insert(element)
+
+
+            # Checks the load factor, will rehash is necassry 
+            if self._count > (HashSet._LOAD_FACTOR * self._TableSize):
+                self._rehash()
+
+        return inserted    
 
     def find(self, key):
         """
@@ -114,7 +140,14 @@ class HashSet:
         -------------------------------------------------------
         """
 
-        #your code goes here
+        found = None
+        index = self._hashfunction(key)
+        slot_table = self._table[index]
+
+        if key in slot_table:
+            found = deepcopy(key)
+        
+        return found
 
     def remove(self, key):
         """
@@ -128,8 +161,47 @@ class HashSet:
             value - if it exists in the Hash Set, None otherwise.
         -------------------------------------------------------
         """
-        #your code goes here
+        value = False
 
+        index = self._hashfunction(key)
+        slot_table = self._table[index]
+
+        if key in slot_table:
+            slot_table.remove(key)
+            self._count -= 1
+            value = True
+
+        return value
+    
+    def _rehash(self):
+        """
+        ---------------------------------------------------------
+        Increases the number of slots in the Hash Set and
+        reallocates the  existing data within the Hash Set to the
+        new table.
+        Use: hs._rehash()
+        -------------------------------------------------------
+        Returns:
+            None
+        -------------------------------------------------------
+        """
+
+        CHANGE_FACTOR = 2 * self._TableSize + 1  
+        self._TableSize = CHANGE_FACTOR     
+        slots = CHANGE_FACTOR - self._TableSize    
+ 
+        for i in range(slots):    
+            self._table.append(SortedList())    
+            
+        for i in self._table:    
+            for j in i:    
+                if j is not None:    
+                    h = hash(j)    
+                    index = h % self._TableSize    
+                    slot_table = self._table[index]    
+                    if j not in slot_table:    
+                        slot_table.insert(j)    
+        return
 
     def __iter__(self):
         """
