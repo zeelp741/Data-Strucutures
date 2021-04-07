@@ -1,6 +1,7 @@
 # Imports
 # Use any appropriate data structure here.
 from List_array import List
+from copy import deepcopy
 
 # Constants
 SEP = '-' * 40
