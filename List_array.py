@@ -643,6 +643,22 @@ class List:
             
         source2._count = 0
         return 
+    
+    def reverse(self):
+        """
+        -------------------------------------------------------
+        The contents of list are reversed in order with respect
+        to their order before the operation was called.
+        Use: source.reverse()
+        -------------------------------------------------------
+        Returns:
+            None
+        -------------------------------------------------------
+        """
+        for i in range(len(self._values) // 2):
+            self._swap(i, len(self._values) - 1)
+
+        return
 
     def __iter__(self):
         """
