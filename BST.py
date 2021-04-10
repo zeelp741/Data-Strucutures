@@ -1072,7 +1072,8 @@ class BST:
             number - count of nodes in bst (int)
         ----------------------------------------------------------
         """
-        #your code goes here
+        number = self._count_aux(self._root)
+        return number
 
     def _count_aux(self, node):
         """
@@ -1085,7 +1086,14 @@ class BST:
             number - count of nodes in the subtree rooted at node (int)
         ----------------------------------------------------------
         """
-        #your code goes here
+        if node is None:
+            # Base case: node does not exist
+            number = 0
+        else:
+            # General case: node exists.
+            number = 1 + self._count_aux(node._left) + \
+                self._count_aux(node._right)
+        return number
 
     def count_apply(self, func):
         """
@@ -1101,7 +1109,8 @@ class BST:
             number - count of nodes in tree where func(element) is True (int)
         ----------------------------------------------------------
         """
-        #your code goes here
+        number = self._count_apply_aux(func, self._root)
+        return number
 
     def _count_apply_aux(self, func, node):
         """
@@ -1116,7 +1125,18 @@ class BST:
             number - count of nodes in the subtree rooted at node (int)
         ----------------------------------------------------------
         """
-        #your code goes here
+        if node is None:
+            # Base case: node does not exist
+            number = 0
+        else:
+            # General case: node exists.
+            if func(node._value):
+                number = 1
+            else:
+                number = 0
+            number = number + self._count_apply_aux(func, node._left) + \
+                self._count_apply_aux(func, node._right)
+        return number
 
 
     def __iter__(self):
