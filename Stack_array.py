@@ -140,34 +140,15 @@ class Stack:
         -------------------------------------------------------
         """
 
-        alternating = 0
-        size = 0
-    
-        while(self._values[-1] == None):
-            if alternating % 2 == 0:
-                if source1._top == -1:
-                    break
-                self.push(source1._values[source1._top])
-                source1._top -= 1
-                size += 1
-            elif alternating % 2 == 1:
-                if source2._top == -1:
-                    break
-                self.push(source2._values[source2._top])  
-                source2._top -= 1    
-                size += 1  
-            alternating += 1
-                    
-        while (size <= self.DEFAULT_SIZE):
-            size += 1  
-            if source1._top == -1:
-                self.push(source2._values[source2._top])
-                source2._top -= 1
-                size += 1
-            elif(source2._top == -1):
-                self.push(source1._values[source1._top])
-                source1._top -= 1
-                size += 1
+        while source1._top >= 0 and source2._top >= 0:
+            self.push(source1.pop())
+            self.push(source2.pop())
+
+        while source1._top >= 0:
+            self.push(source1.pop())
+
+        while source2._top >= 0:
+            self.push(source2.pop())
         return
 
     def split_alt(self):
