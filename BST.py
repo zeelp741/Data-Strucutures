@@ -967,7 +967,9 @@ class BST:
             tree - a mirror version of BST
         ---------------------------------------------------------
         """
-        #your code goes here
+        tree = BST()
+        tree._root = self._mirror_aux(self._root)
+        return tree
 
     def _mirror_aux(self, node):
         """
@@ -984,8 +986,13 @@ class BST:
             tree - a mirror version of subtree rooted at node.
         ---------------------------------------------------------
         """
-        #your code goes here
-
+        if node is not None:
+            new_node = _BST_Node(node._value)
+            new_node._right = self._mirror_aux(node._left)
+            new_node._left = self._mirror_aux(node._right)
+        else:
+            new_node = None
+        return new_node
 
     def _node_height(self, node):
         """
@@ -1002,7 +1009,11 @@ class BST:
              0 if node is None,  (int)
         ---------------------------------------------------------
         """
-        #your code goes here
+        if node is None:
+            height = 0
+        else:
+            height = node._height
+        return height
 
     def find_r(self, element):
         """
@@ -1014,11 +1025,12 @@ class BST:
         Parameters:
             element - a data element to search for (?)
         Returns:
-            node - If bst contains the given element, otherwise
-                returns None.
+            node - If bst contains key, returns value, else 
+            returns None.
         -------------------------------------------------------
         """
-        #your code goes here
+        node = self._find_r_aux(self._root, element)
+        return node
 
     def _find_r_aux(self, current, element):
         """
@@ -1032,7 +1044,17 @@ class BST:
             node - contains element, else returns None (?)
         -------------------------------------------------------
         """
-        #your code goes here
+        if current is None:
+            # Base case: at bottom of tree and key not found.
+            node = None
+        else:
+            if element < current._value:
+                node = self._find_r_aux(current._left, element)
+            elif element > current._value:
+                node = self._find_r_aux(current._right, element)
+            else:
+                node = deepcopy(current._value)
+        return node
 
     def average_height(self):
         """
@@ -1045,7 +1067,8 @@ class BST:
         ---------------------------------------------------------
         """
 
-        #your code goes here
+        count = self._count
+
 
     def preorder_i(self):
         """
